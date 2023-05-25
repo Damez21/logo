@@ -33,5 +33,21 @@ const questions = [
     }
 ];
 
+function writeToFile(fileName, data) {
+    var logo = generateLogo(data);
+    fs.writeFile(fileName, logo, function(error){
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Generated logo.svg');
+    });
+}
 
+function init() {
+    inquirer.prompt(questions).then(function (data) {
+        var fileName = 'logo.svg';
+        writeToFile(fileName, data);
+    });
+}
 
+init();
